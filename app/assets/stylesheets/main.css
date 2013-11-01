@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.hidden_box{
+  display:none;
+}
+
+.ba_box{
+  height:250px;
+  text-align:center;
+  margin: 5px;
+  padding: 5px;
+}

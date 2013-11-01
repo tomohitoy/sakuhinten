@@ -1,0 +1,29 @@
+<h1>Listing atos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Kumo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @atos.each do |ato| %>
+      <tr>
+        <td><%= ato.image %></td>
+        <td><%= ato.kumo_id %></td>
+        <td><%= link_to 'Show', ato %></td>
+        <td><%= link_to 'Edit', edit_ato_path(ato) %></td>
+        <td><%= link_to 'Destroy', ato, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ato', new_ato_path %>

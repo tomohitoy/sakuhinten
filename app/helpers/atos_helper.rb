@@ -1,0 +1,2 @@
+module AtosHelper
+end

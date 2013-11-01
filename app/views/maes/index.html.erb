@@ -1,0 +1,29 @@
+<h1>Listing maes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Kumo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @maes.each do |mae| %>
+      <tr>
+        <td><%= mae.image %></td>
+        <td><%= mae.kumo_id %></td>
+        <td><%= link_to 'Show', mae %></td>
+        <td><%= link_to 'Edit', edit_mae_path(mae) %></td>
+        <td><%= link_to 'Destroy', mae, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mae', new_mae_path %>

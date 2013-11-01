@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @kumo.user_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @kumo.title %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @kumo.name %>
+</p>
+
+<%= link_to 'Edit', edit_kumo_path(@kumo) %> |
+<%= link_to 'Back', kumos_path %>

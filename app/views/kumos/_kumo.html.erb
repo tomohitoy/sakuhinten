@@ -1,0 +1,98 @@
+<% iro = rand(5) %>
+<% if iro == 0 %>
+<% iro = "panel-info" %>
+<% elsif iro == 2 %>
+<% iro = "panel-info" %>
+<% elsif iro == 3 %>
+<% iro = "panel-info" %>
+<% else %>
+<% iro = "panel-info" %>
+<% end %>
+<div class="col-xs-10 col-sm-8 col-md-6 col-lg-4">
+	<div class="panel <%= iro %>">
+		<div class="panel-heading" style="text-align:center;">
+			<p><%= kumo.name %>さんの作品</p>
+		</div>
+		<div class="panel-body zoomTarget" data-targetsize="0.8" data-closeclick="true">
+			<div class="ba_box">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<%= image_tag kumo.mae.image_url.to_s, :class => 'img-thumbnail', :width => '200px' %>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<%= image_tag kumo.ato.image_url.to_s, :class => 'img-thumbnail', :width => '200px' %>
+					</div>
+				</div>
+				<div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h3><%= kumo.title %></h3>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<button id="comment<%= kumo.id %>" class="btn">コメント一覧</button>　<%= link_to "編集する", edit_kumo_path(kumo), :class=>'btn btn-success'%>
+			<div class="hidden_box" id="hidden<%= kumo.id %>">
+			<hr>
+				<div>
+				<% kumo.comments.each do |comment|%>
+					<div>
+						<% if comment.jinkaku == 1 %>
+						<p class="text-warning"><strong><%= comment.content %></strong><br><small>by天使：<%= comment.name %></small></p>
+						<% elsif comment.jinkaku == 2 %>
+						<p class="text-danger"><strong><%= comment.content %></strong><br><small>by悪魔：<%= comment.name %></small></p>
+						<% elsif comment.jinkaku == 3 %>
+						<p class="text-info"><strong><%= comment.content %></strong><br><small>by情報屋：<%= comment.name %></small></p>
+						<% else %>
+						<p class="text-success"><strong><%= comment.content %></strong><br><small>byアーティスト：<%= comment.name %></small></p>
+						<% end %>
+					</div>
+				<% end %>
+				</div>
+				<div>
+				あなたはどのタイプ？
+				<% @comment = kumo.comments.build %>
+					<%= form_for @comment, :class=>'form-inline' do |f| %>
+						<div class="form-group">
+							<div class="radio">
+								<label>
+									<%= f.radio_button :jinkaku, 1, :required => true %> <p class="text-warning">いいところを褒めまくる天使タイプ</p>
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<%= f.radio_button :jinkaku, 2, :required => true %> <p class="text-danger">弱点を見つけて攻める悪魔タイプ</p>
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<%= f.radio_button :jinkaku, 3, :required => true %> <p class="text-info">似たものを探してくる情報屋タイプ</p>
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<%= f.radio_button :jinkaku, 4, :required => true %> <p class="text-success">アイディアを付け足すアーティストタイプ</p>
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<%= f.text_field :name, :class=>'form-control input-lg', :placeholder => "名前", :required => true%>
+						</div>
+						<div class="form-group">
+							<%= f.text_area :content, :class=>'form-control input-lg', :rows => '2',  :placeholder => "コメント", :required => true %>
+						</div>
+							<%= f.hidden_field :kumo_id %>
+						<div class="action">
+							<%= f.submit "コメントする", :class=>'btn btn-primary'%>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%= javascript_tag do %>
+	$(function(){
+		$("#comment<%= kumo.id %>").on('click',function(){
+			$("#hidden<%= kumo.id %>").toggle("fast");
+		});
+	});
+<% end %>
