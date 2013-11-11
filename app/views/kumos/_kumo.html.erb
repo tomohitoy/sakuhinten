@@ -29,25 +29,19 @@
 			</div>
 		</div>
 		<div class="panel-footer">
-			<button id="comment<%= kumo.id %>" class="btn">コメント一覧</button>　<%= link_to "編集する", edit_kumo_path(kumo), :class=>'btn btn-success'%>
+			<button id="open<%= kumo.id %>" class="btn">コメント一覧</button><button id="close<%= kumo.id %>" class="btn hidden_btn">閉じる</button>　<button id="edit<%= kumo.id %>" class="btn btn-success">編集する</button>
+			<div class="hidden_box" id="editform<%= kumo.id %>">
+			<h4>秘密の質問の答えを入力してください。</h4>
+			<%= kumo.question %>
+			<%= form_tag(edit_kumo_path(kumo), :method => :get, :class=>'form-inline' ) do %>
+				<%= text_field_tag :answer %>
+				<%= submit_tag '編集ページヘ', :class=>'btn btn-info'%>
+			<% end %>
+			</div>
 			<div class="hidden_box" id="hidden<%= kumo.id %>">
-			<hr>
-				<div>
-				<% kumo.comments.each do |comment|%>
-					<div>
-						<% if comment.jinkaku == 1 %>
-						<p class="text-warning"><strong><%= comment.content %></strong><br><small>by天使：<%= comment.name %></small></p>
-						<% elsif comment.jinkaku == 2 %>
-						<p class="text-danger"><strong><%= comment.content %></strong><br><small>by悪魔：<%= comment.name %></small></p>
-						<% elsif comment.jinkaku == 3 %>
-						<p class="text-info"><strong><%= comment.content %></strong><br><small>by情報屋：<%= comment.name %></small></p>
-						<% else %>
-						<p class="text-success"><strong><%= comment.content %></strong><br><small>byアーティスト：<%= comment.name %></small></p>
-						<% end %>
-					</div>
-				<% end %>
-				</div>
-				<div>
+				<hr>
+				<button id="fbutton<%= kumo.id %>" class="btn btn-info hidden_btn">コメントする</button>
+				<div class="hidden_box" id="form<%= kumo.id %>">
 				あなたはどのタイプ？
 				<% @comment = kumo.comments.build %>
 					<%= form_for @comment, :class=>'form-inline' do |f| %>
@@ -69,12 +63,12 @@
 							</div>
 							<div class="radio">
 								<label>
-									<%= f.radio_button :jinkaku, 4, :required => true %> <p class="text-success">アイディアを付け足すアーティストタイプ</p>
+									<%= f.radio_button :jinkaku, 4, :required => true %> <p class="text-success">賢明な助言をする仙人タイプ</p>
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
-							<%= f.text_field :name, :class=>'form-control input-lg', :placeholder => "名前", :required => true%>
+							<%= f.text_field :name, :class=>'form-control input-lg', :placeholder => "名前", :required => true %>
 						</div>
 						<div class="form-group">
 							<%= f.text_area :content, :class=>'form-control input-lg', :rows => '2',  :placeholder => "コメント", :required => true %>
@@ -85,14 +79,48 @@
 						</div>
 					<% end %>
 				</div>
+				<hr>
+				<div>
+				<% kumo.comments.each do |comment|%>
+					<div>
+						<% if comment.jinkaku == 1 %>
+						<p class="text-warning"><strong><%= comment.content %></strong><br><small>by天使：<%= comment.name %></small></p>
+						<% elsif comment.jinkaku == 2 %>
+						<p class="text-danger"><strong><%= comment.content %></strong><br><small>by悪魔：<%= comment.name %></small></p>
+						<% elsif comment.jinkaku == 3 %>
+						<p class="text-info"><strong><%= comment.content %></strong><br><small>by情報屋：<%= comment.name %></small></p>
+						<% else %>
+						<p class="text-success"><strong><%= comment.content %></strong><br><small>by仙人：<%= comment.name %></small></p>
+						<% end %>
+					</div>
+				<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <%= javascript_tag do %>
 	$(function(){
-		$("#comment<%= kumo.id %>").on('click',function(){
+		$("#open<%= kumo.id %>").on('click',function(){
 			$("#hidden<%= kumo.id %>").toggle("fast");
+			$("#open<%= kumo.id %>").hide();
+			$("#close<%= kumo.id %>").show();
+			$("#form<%= kumo.id %>").hide();
+			$("#fbutton<%= kumo.id %>").show();
+			$("#editform<%= kumo.id %>").hide();			
+		});
+		$("#close<%= kumo.id %>").on('click',function(){
+			$("#hidden<%= kumo.id %>").toggle("fast");
+			$("#open<%= kumo.id %>").show();
+			$("#close<%= kumo.id %>").hide();
+			$("#editform<%= kumo.id %>").hide();
+		});
+		$("#fbutton<%= kumo.id %>").on('click',function(){
+			$("#form<%= kumo.id %>").toggle("fast");
+			$("#fbutton<%= kumo.id %>").hide();
+		});
+		$("#edit<%= kumo.id %>").on('click',function(){
+			$("#editform<%= kumo.id %>").toggle("fast");
 		});
 	});
 <% end %>

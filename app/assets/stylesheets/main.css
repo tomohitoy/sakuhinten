@@ -4,6 +4,10 @@
   display:none;
 }
 
+.hidden_btn{
+  display:none;
+}
+
 .ba_box{
   height:250px;
   text-align:center;

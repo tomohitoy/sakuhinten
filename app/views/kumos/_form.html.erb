@@ -1,38 +1,42 @@
 <div class="row">
 	<%= form_for(@kumo) do |f| %>
-		<div class="well">
-			<%= f.label :title, "タイトル" %><br>
-			<%= f.text_field :title, :class=>'form-control input-lg', :placeholder => "タイトル" %>
-		</div>
-		<div class="well">
-			<%= f.fields_for :mae, :html => {:multipart => true}  do |mae_field| %>
-				<div class="field">
-					<%= mae_field.label :image, "ビフォー(変わる前の写真を投稿してください)"%>
-					<%= mae_field.file_field :image %>
-				</div>
-			<% end %>
-		</div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<div class="well">
+				<%= f.label :title, "タイトル" %><br>
+				<%= f.text_field :title, :class=>'form-control input-lg', :placeholder => "タイトル" %>
+			</div>
+			<div class="well">
+				<%= f.fields_for :mae, :html => {:multipart => true}  do |mae_field| %>
+					<div class="field">
+						<%= mae_field.label :image, "ビフォー(変わる前の写真を投稿してください)"%>
+						<%= mae_field.file_field :image %>
+					</div>
+				<% end %>
+			</div>
 		
-		<div class="well">
-			<%= f.fields_for :ato, :html => {:multipart => true}  do |ato_field| %>
-				<div class="field">
-					<%= ato_field.label :image, "アフター(変わった後の写真を投稿してください)" %>
-					<%= ato_field.file_field :image %>
-				</div>
-			<% end %>
-		</div>	
-		<div class="well">
-			<%= f.label :name, "名前" %><br>
-			<%= f.text_field :name, :class=>'form-control', :placeholder => "名前" %>
-			<br>
-			<%= f.label :name, "秘密の質問" %><br>
-			<%= f.text_field :question, :class=>'form-control', :placeholder => "秘密の質問" %>
-			<%= f.label :name, "秘密の質問の答え" %><br>
-			<%= f.text_field :answer, :class=>'form-control', :placeholder => "秘密の質問の答え" %>
+			<div class="well">
+				<%= f.fields_for :ato, :html => {:multipart => true}  do |ato_field| %>
+					<div class="field">
+						<%= ato_field.label :image, "アフター(変わった後の写真を投稿してください)" %>
+						<%= ato_field.file_field :image %>
+					</div>
+				<% end %>
+			</div>
 		</div>
+		<div class="col-sm-6 col-md-6 col-lg-6">
+			<div class="well">
+				<%= f.label :name, "名前" %><br>
+				<%= f.text_field :name, :class=>'form-control', :placeholder => "名前" %>
+				<br>
+				<%= f.label :name, "秘密の質問(編集するときに必要です)" %><br>
+				<%= f.text_field :question, :class=>'form-control', :placeholder => "秘密の質問" %>
+				<%= f.label :name, "秘密の質問の答え" %><br>
+				<%= f.text_field :answer, :class=>'form-control', :placeholder => "秘密の質問の答え" %>
+			</div>
 
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<%= f.submit "登録・更新する", :class=>'btn btn-primary btn-lg' %>　<%= link_to '戻る', kumos_path, :class=>'btn btn-danger btn-lg' %>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<%= f.submit "登録・更新する", :class=>'btn btn-primary btn-lg' %>　<%= link_to '戻る', kumos_path, :class=>'btn btn-danger btn-lg' %>
+			</div>
 		</div>
 	<% end %>
 </div>

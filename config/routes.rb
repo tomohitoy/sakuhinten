@@ -1,5 +1,6 @@
 Sakuhinten::Application.routes.draw do
 
+  get "welcome/index"
   resources :comments
 
   root :to => "kumos#index"

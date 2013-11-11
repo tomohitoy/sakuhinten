@@ -21,6 +21,9 @@ class KumosController < ApplicationController
 
   # GET /kumos/1/edit
   def edit
+  	if @kumo.answer != params[:answer]
+  	  redirect_to root_path, :notice => 'あなたの回答が間違っているようです。'
+  	end
   end
   
   def confirm
@@ -75,5 +78,5 @@ class KumosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def kumo_params
       params.require(:kumo).permit(:user_id, :title, :name, :question, :answer, :mae_attributes => [:id, :image], :ato_attributes => [:id, :image])
-    end
+    end    
 end
