@@ -1,4 +1,6 @@
 require 'bundler/capistrano'
+require 'capistrano_colors'
+
 load 'deploy/assets'
 
 set :application, "sakuhinten"
