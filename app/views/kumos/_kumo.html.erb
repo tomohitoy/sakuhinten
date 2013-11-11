@@ -89,7 +89,7 @@
 						<p class="text-danger"><strong><%= comment.content %></strong><br><small>by悪魔：<%= comment.name %></small></p>
 						<% elsif comment.jinkaku == 3 %>
 						<p class="text-info"><strong><%= comment.content %></strong><br><small>by情報屋：<%= comment.name %></small></p>
-						<% else %>
+						<% elsif comment.jinkaku == 4 %>
 						<p class="text-success"><strong><%= comment.content %></strong><br><small>by仙人：<%= comment.name %></small></p>
 						<% end %>
 					</div>
