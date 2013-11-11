@@ -26,14 +26,6 @@ end
 
 after "deploy:update", "deploy:cleanup"
 
-after "deploy:update_code", "deploy:copy_old_sitemap"
-namespace :deploy do
-  task :copy_old_sitemap do
-    run "if [ -e #{previous_release}/public/sitemap.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
-  end
-end
-
-
 namespace :deploy do
   desc "Restarts your application."
   task :restart, :roles => :app do
