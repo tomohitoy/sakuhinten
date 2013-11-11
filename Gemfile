@@ -53,3 +53,10 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :deployment do
+  gem 'capistrano'
+  gem 'capistrano_colors'
+  gem 'capistrano-ext'
+  gem 'capistrano_rsync_with_remote_cache'
+end
