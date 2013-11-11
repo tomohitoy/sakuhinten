@@ -34,6 +34,6 @@ production:
   encoding: utf8
   database: sakuhinten_production
   pool: 5
-  username: root
-  password: 6x9etzktzr
+  username: sakuhinten
+  password: cfanVdT2
   host: 127.0.0.1
